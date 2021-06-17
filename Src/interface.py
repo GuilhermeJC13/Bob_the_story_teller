@@ -1,6 +1,7 @@
 from time import sleep
 import pygame
 import sys
+import threading
 
 class Mouse(pygame.sprite.Sprite):
     def __init__(self,path):
@@ -23,16 +24,26 @@ class Interface:
         self.iniciate_interface()
 
         self.speaking = False
+        self.speaking_flag = False
         self.clicking = False
+        self.blinking = False
+
+        blink_thread = threading.Thread(target=self.blink)
+        blink_thread.start()
+
+        #self.render()
 
     def iniciate_interface(self):
         self.screen = pygame.display.set_mode((self.width, self.height))
 
-        self.music_theme = pygame.mixer.Sound("Data/Audio/theme.wav")
+        #self.music_theme = pygame.mixer.Sound("Data/Audio/theme.mp3")
+        self.music_theme = pygame.mixer.Sound("Data\Audio\horror_ambient.mp3")
+        self.music_theme.set_volume(0.1)
 
         self.background = pygame.image.load("Data\sprites\Background.png")
         self.bob = pygame.image.load("Data\sprites\Bob.png")
         self.bob_talking = pygame.image.load("Data\sprites\Bob_talking.png")
+        self.bob_blinking = pygame.image.load("Data\sprites\Bob_blink.png")
 
         pygame.mouse.set_visible(False)
 
@@ -53,6 +64,17 @@ class Interface:
 
         self.screen.blit(self.background,(0,0))
         self.screen.blit(self.bob, (150,50))
+
+        if self.speaking and self.speaking_flag:
+            self.screen.blit(self.bob_talking, (150,50))
+            self.speaking = False
+        
+        elif self.speaking_flag:
+            self.screen.blit(self.bob, (150,50))
+            self.speaking = True
+
+        if self.blinking:
+            self.screen.blit(self.bob_blinking, (150,50))
 
         self.check()
 
@@ -76,12 +98,9 @@ class Interface:
             if event.type == pygame.MOUSEBUTTONUP:
                 self.clicking = False
 
-    def speak(self):
-        if self.speaking:
-            self.screen.blit(self.bob_talking, (150,50))
-            self.speaking = False
-            sleep(0.5)
-        else:
-            self.screen.blit(self.bob, (150,50))
-            self.speaking = True
-            sleep(0.5)
+    def blink(self):
+        while(True):
+            sleep(7)
+            self.blinking = True
+            sleep(0.1)
+            self.blinking = False

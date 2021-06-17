@@ -1,0 +1,24 @@
+{
+    "os": "Windows-10-10.0.19041-SP0",
+    "python": "3.8.5",
+    "heartbeatAt": "2021-06-14T18:18:58.134600",
+    "startedAt": "2021-06-14T18:18:43.733250",
+    "docker": null,
+    "gpu": "GeForce GTX 1050",
+    "gpu_count": 1,
+    "cpu_count": 8,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "c:\\Users\\Lucio\\Desktop\\Programa\u00e7\u00e3o\\Git\\Bob_the_chatbot\\Src\\Trainer.py",
+    "codePath": "Src\\Trainer.py",
+    "git": {
+        "remote": "https://github.com/GuilhermeJC13/Bob_the_chatbot",
+        "commit": "3d538a778918568267e01bc384397d910f9b4187"
+    },
+    "email": "guircos1@gmail.com",
+    "root": "C:/Users/Lucio/Desktop/Programa\u00e7\u00e3o/Git/Bob_the_chatbot",
+    "host": "DESKTOP-LFJENP8",
+    "username": "Lucio",
+    "executable": "C:\\Users\\Lucio\\anaconda3\\python.exe"
+}
